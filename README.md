@@ -1,0 +1,1 @@
+https://www.boost.org/doc/libs/1_73_0/libs/outcome/doc/html/tutorial/essential.html
