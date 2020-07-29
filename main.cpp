@@ -46,13 +46,18 @@ HRESULT FoobarHRESULT(bool askFailure, std::string& msg)
 	return 0;
 }
 
+std::error_code SystemError(HRESULT hr)
+{
+	return { hr, std::system_category() };
+}
+
 Result<std::string> Foobar(bool askFailure)
 {
 	std::string msg;
 	auto hr = FoobarHRESULT(askFailure, msg);
 	if (FAILED(hr))
 	{
-		return { hr, std::system_category() };
+		return SystemError(hr);
 	}
 
 	return msg;
