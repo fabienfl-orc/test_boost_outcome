@@ -35,6 +35,12 @@
 template<typename T>
 using Result = boost::outcome_v2::std_result<T>;
 
+template<typename T>
+T& operator *(Result<T>& result) { return result.value(); }
+
+template<typename T>
+const T& operator *(const Result<T>& result) { return result.value(); }
+
 HRESULT FoobarHRESULT(bool askFailure, std::string& msg)
 {
 	if (askFailure)
@@ -73,7 +79,7 @@ void Test(bool askFailure)
 	}
 	else
 	{
-		std::cout << ", value: '" << msg.value() << "'" << std::endl;
+		std::cout << ", value: '" << *msg << "'" << std::endl;
 	}
 }
 
